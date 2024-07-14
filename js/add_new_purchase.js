@@ -25,7 +25,7 @@ class NewMedicine {
 function addRow() {
   if(typeof addRow.counter == 'undefined')
     addRow.counter = 1;
-  var previous = document.getElementById("purchase_medicine_list_div").innerHTML;
+  var previous = document.getElementById("purchase_product_list_div").innerHTML;
   var node = document.createElement("div");
   var id = document.createAttribute("id");
   id.value = "medicine_row_" + addRow.counter;
@@ -34,7 +34,7 @@ function addRow() {
   xhttp.onreadystatechange = function() {
     if(xhttp.readyState = 4 && xhttp.status == 200)
       node.innerHTML = xhttp.responseText;
-      document.getElementById("purchase_medicine_list_div").appendChild(node);
+      document.getElementById("purchase_product_list_div").appendChild(node);
   };
   xhttp.open("GET", "php/add_new_purchase.php?action=add_row&row_id=" + id.value + "&row_number=" + addRow.counter, true);
   xhttp.send();
@@ -97,7 +97,7 @@ function getAmount(row_number) {
   var rate = document.getElementById("rate_" + row_number).value;
   document.getElementById("amount_" + row_number).value = qty * rate;
 
-  var parent = document.getElementById('purchase_medicine_list_div');
+  var parent = document.getElementById('purchase_product_list_div');
   var row_count = parent.childElementCount;
   var medicine_info = parent.children;
   var total = 0;
@@ -131,7 +131,7 @@ function addPurchase() {
   else if(!checkDate(invoice_date.value, 'date_error'))
     invoice_date.focus();
   else {
-    var parent = document.getElementById('purchase_medicine_list_div');
+    var parent = document.getElementById('purchase_product_list_div');
     var row_count = parent.childElementCount;
     var medicine_info = parent.children;
 
@@ -143,8 +143,8 @@ function addPurchase() {
       var elements_count = medicine_info[i].childElementCount;
       var elements = medicine_info[i].children;
 
-      var medicine_name = elements[0].children[0].children[0];
-      var medicine_name_error = elements[0].children[0].children[1];
+      var product_name = elements[0].children[0].children[0];
+      var product_name_error = elements[0].children[0].children[1];
 
       var packing = elements[0].children[1].children[0];
       var pack_error = elements[0].children[1].children[1];
@@ -173,8 +173,8 @@ function addPurchase() {
       var grand_total = document.getElementById("grand_total");
 
       var flag = false;
-      if(!notNull(medicine_name.value, medicine_name_error.getAttribute('id')))
-        medicine_name.focus();
+      if(!notNull(product_name.value, product_name_error.getAttribute('id')))
+        product_name.focus();
 
       else if(!notNull(packing.value, pack_error.getAttribute('id')))
         packing.focus();
@@ -205,7 +205,7 @@ function addPurchase() {
         rate_error.innerHTML = "Rate must be less than MRP!";
         rate.focus();
       }
-      else if(isNewMedicine(medicine_name.value, packing.value) == "true" && generic_name.value == "") {
+      else if(isNewMedicine(product_name.value, packing.value) == "true" && generic_name.value == "") {
         generic_name_error.style.display = "block";
         generic_name_error.innerHTML = "Required for new Medicine!";
         generic_name.focus();
@@ -215,8 +215,8 @@ function addPurchase() {
         flag = true;
         //alert("row perfect...");
         // go ahead and store row date
-        medicineStockRow[i-1] = new MedicineStock(medicine_name.value, batch_id.value, expiry_date.value, quantity.value, mrp.value, rate.value);
-        newMedicine[i-1] = new NewMedicine(medicine_name.value, packing.value, generic_name.value, suppliers_name.value);
+        medicineStockRow[i-1] = new MedicineStock(product_name.value, batch_id.value, expiry_date.value, quantity.value, mrp.value, rate.value);
+        newMedicine[i-1] = new NewMedicine(product_name.value, packing.value, generic_name.value, suppliers_name.value);
       }
       if(!flag)
         return false;
@@ -226,7 +226,7 @@ function addPurchase() {
     for(var i = 0; i < row_count - 1; i++) {
       if(isNewMedicine(newMedicine[i].name, newMedicine[i].packing) == "true")
         addNewMedicine(newMedicine[i].name, newMedicine[i].packing, newMedicine[i].generic_name, newMedicine[i].supplier_name);
-      addMedicineStock(medicineStockRow[i].name, medicineStockRow[i].batch_id, medicineStockRow[i].expiry_date, medicineStockRow[i].quantity, medicineStockRow[i].mrp, medicineStockRow[i].rate, invoice_number.value);
+      addProductStock(medicineStockRow[i].name, medicineStockRow[i].batch_id, medicineStockRow[i].expiry_date, medicineStockRow[i].quantity, medicineStockRow[i].mrp, medicineStockRow[i].rate, invoice_number.value);
     }
     addNewPurchase(suppliers_name.value, invoice_number.value, payment_type.value, invoice_date.value, grand_total.value);
   }
@@ -242,7 +242,7 @@ function addNewMedicine(name, packing, generic_name, supplier_name) {
   xhttp.send();
 }
 
-function addMedicineStock(name, batch_id, expiry_date, quantity, mrp, rate, invoice_number) {
+function addProductStock(name, batch_id, expiry_date, quantity, mrp, rate, invoice_number) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if(xhttp.readyState = 4 && xhttp.status == 200)

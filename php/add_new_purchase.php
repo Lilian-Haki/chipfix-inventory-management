@@ -98,8 +98,8 @@
       ?>
       <div class="row col col-md-12">
         <div class="col col-md-2">
-          <input type="text" class="form-control" placeholder="Product Name" name="medicine_name">
-          <code class="text-danger small font-weight-bold float-right" id="medicine_name_error_<?php echo $row_number; ?>" style="display: none;"></code>
+          <input type="text" class="form-control" placeholder="Product Name" name="product_name">
+          <code class="text-danger small font-weight-bold float-right" id="product_name_error_<?php echo $row_number; ?>" style="display: none;"></code>
         </div>
         <div class="col col-md-1">
           <input type="text" class="form-control" name="packing">
@@ -137,13 +137,6 @@
           </div>
         </div>
       </div><br>
-      <div class="row col col-md-8">
-        <div class="col col-md-4"><label for="generic_name" class="font-weight-bold">&nbsp;If new product, generic name : </label></div>
-        <div class="col col-md-8">
-          <input type="text" class="form-control" placeholder="Generic Name" name="generic_name">
-          <code class="text-danger small font-weight-bold float-right" id="generic_name_error_<?php echo $row_number; ?>" style="display: none;"></code>
-        </div>
-      </div>
       <div class="col col-md-12">
         <hr class="col-md-12" style="padding: 0px;">
       </div>

@@ -18,21 +18,6 @@
     <script src="js/restrict.js"></script>
   </head>
   <body>
-    <div id="add_new_supplier_model">
-      <div class="modal-dialog">
-      	<div class="modal-content">
-      		<div class="modal-header" style="background-color: #7F74E7; color: white">
-            <div class="font-weight-bold">Add New Supplier</div>
-      			<button class="close" style="outline: none;" onclick="document.getElementById('add_new_supplier_model').style.display = 'none';"><i class="fa fa-close"></i></button>
-      		</div>
-      		<div class="modal-body">
-            <?php
-              include('sections/add_new_supplier.html');
-            ?>
-      		</div>
-      	</div>
-      </div>
-    </div>
     <!-- including side navigations -->
     <?php include("sections/sidenav.html"); ?>
 
@@ -75,8 +60,8 @@
               <label class="font-weight-bold" for="paytype">Payment Type :</label>
               <select id="payment_type" name="paytype" class="form-control">
               	<option value="Cash Payment">Cash Payment</option>
-                <option value="Net Banking">Net Banking</option>
-                <option value="Payment Due">Payment Due</option>
+                <option value="Net Banking">Bank Payment</option>
+                <option value="Payment Due">Mpesa Payment</option>
               </select>
             </div>
 
@@ -87,11 +72,6 @@
             </div>
 
           </div>
-
-          <div class="row col col-md-12">
-            <div class="col col-md-2 font-weight-bold" style="color: green; cursor:pointer" onclick="document.getElementById('add_new_supplier_model').style.display = 'block';">
-            	<i class="fa fa-plus"></i>&nbsp;Add New Supplier
-            </div>
           </div>
           <!-- supplier details content end -->
 
@@ -116,7 +96,7 @@
           <div class="col col-md-12">
             <hr class="col-md-12" style="padding: 0px; border-top: 2px solid  #02b6ff;">
           </div>
-          <div id="purchase_medicine_list_div">
+          <div id="purchase_product_list_div">
             <script> addRow(); </script>
           </div>
           <!-- end medicines -->

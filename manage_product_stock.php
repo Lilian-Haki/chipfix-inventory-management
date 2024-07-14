@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Manage Medicines Stock</title>
+    <title>Manage Product Stock</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script src="bootstrap/js/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/sidenav.css">
     <link rel="stylesheet" href="css/home.css">
-    <script src="js/manage_medicine_stock.js"></script>
+    <script src="js/manage_product_stock.js"></script>
     <script src="js/validateForm.js"></script>
     <script src="js/restrict.js"></script>
   </head>
@@ -34,11 +34,11 @@
 
           <div class="col-md-12 form-group form-inline">
             <label class="font-weight-bold" for="">Search :&emsp;</label>
-            <input type="text" class="form-control" id="by_name" placeholder="By Product Name" onkeyup="searchMedicineStock(this.value, 'NAME');">
-            &emsp;<input type="text" class="form-control" id="by_generic_name" placeholder="By Generic Name" onkeyup="searchMedicineStock(this.value, 'GENERIC_NAME');">
-            &emsp;<input type="text" class="form-control" id="by_suppliers_name" placeholder="By Supplier Name" onkeyup="searchMedicineStock(this.value, 'SUPPLIER_NAME');">
-            &emsp;<button class="btn btn-danger font-weight-bold" onclick="searchMedicineStock('0', 'QUANTITY');">Out of Stock</button>
-            &emsp;<button class="btn btn-warning font-weight-bold" onclick="searchMedicineStock('', 'EXPIRY_DATE');">Expired</button>
+            <input type="text" class="form-control" id="by_name" placeholder="By Product Name" onkeyup="searchProductStock(this.value, 'NAME');">
+            &emsp;<input type="text" class="form-control" id="by_generic_name" placeholder="By Generic Name" onkeyup="searchProductStock(this.value, 'GENERIC_NAME');">
+            &emsp;<input type="text" class="form-control" id="by_suppliers_name" placeholder="By Supplier Name" onkeyup="searchProductStock(this.value, 'SUPPLIER_NAME');">
+            &emsp;<button class="btn btn-danger font-weight-bold" onclick="searchProductStock('0', 'QUANTITY');">Out of Stock</button>
+            &emsp;<button class="btn btn-warning font-weight-bold" onclick="searchProductStock('', 'EXPIRY_DATE');">Expired</button>
             &emsp;<button class="btn btn-success font-weight-bold" onclick="cancel();"><i class="fa fa-refresh"></i></button>
           </div>
 
@@ -65,15 +65,15 @@
                     <th style="width: 10%;">Action</th>
             			</tr>
             		</thead>
-                <tbody id="medicines_stock_div">
+                <tbody id="products_stock_div">
                   <?php
-                    require 'php/manage_medicine_stock.php';
+                    require 'php/manage_product_stock.php';
                     if(isset($_GET['out_of_stock']))
-                      echo "<script>searchMedicineStock('0', 'QUANTITY');</script>";
+                      echo "<script>searchProductStock('0', 'QUANTITY');</script>";
                     else if(isset($_GET['expired']))
-                      echo "<script>searchMedicineStock('', 'EXPIRY_DATE');</script>";
+                      echo "<script>searchProductStock('', 'EXPIRY_DATE');</script>";
                     else
-                      showMedicinesStock("0");
+                      showProductsStock("0");
                   ?>
             		</tbody>
             	</table>

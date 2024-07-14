@@ -30,7 +30,7 @@
 <div class="row col col-md-12">
   <div class="col col-md-12 form-group">
     <label class="font-weight-bold" for="supplier_address">Supplier Location :</label>
-    <textarea class="form-control" placeholder="County" id="supplier_address" onblur="validateAddress(this.value, 'address_error');"></textarea>
+    <input type="name" required class="form-control" placeholder="County" id="supplier_address" onblur="validateAddress(this.value, 'address_error');">
     <code class="text-danger small font-weight-bold float-right" id="address_error" style="display: none;"></code>
   </div>
 </div>

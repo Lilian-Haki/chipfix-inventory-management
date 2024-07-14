@@ -167,7 +167,7 @@
                 ?>
                 <tr>
                   <td><?php echo $seq_no; ?></td>
-                  <td><?php echo $row['MEDICINE_NAME']; ?></td>
+                  <td><?php echo $row['product_name']; ?></td>
                   <td><?php echo $row['EXPIRY_DATE']; ?></td>
                   <td><?php echo $row['QUANTITY']; ?></td>
                   <td><?php echo $row['MRP']; ?></td>

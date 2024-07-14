@@ -7,12 +7,12 @@
       $query = "DELETE FROM medicines WHERE ID = $id";
       $result = mysqli_query($con, $query);
       if(!empty($result))
-    		showMedicinesStock("0");
+    		showProductsStock("0");
     }
 
     if(isset($_GET["action"]) && $_GET["action"] == "edit") {
       $id = $_GET["id"];
-      showMedicinesStock($id);
+      showProductsStock($id);
     }
 
     if(isset($_GET["action"]) && $_GET["action"] == "update") {
@@ -22,17 +22,17 @@
       $quantity = ucwords($_GET["quantity"]);
       $mrp = ucwords($_GET["mrp"]);
       $rate = ucwords($_GET["rate"]);
-      updateMedicineStock($id, $batch_id, $expiry_date, $quantity, $mrp, $rate);
+      updateProductStock($id, $batch_id, $expiry_date, $quantity, $mrp, $rate);
     }
 
     if(isset($_GET["action"]) && $_GET["action"] == "cancel")
-      showMedicinesStock("0");
+      showProductsStock("0");
 
     if(isset($_GET["action"]) && $_GET["action"] == "search")
-      searchMedicineStock(strtoupper($_GET["text"]), $_GET["tag"]);
+      searchProductStock(strtoupper($_GET["text"]), $_GET["tag"]);
   }
 
-  function showMedicinesStock($id) {
+  function showProductsStock($id) {
     require "db_connection.php";
     if($con) {
       $seq_no = 0;
@@ -43,12 +43,12 @@
         if($row['BATCH_ID'] == $id)
           showEditOptionsRow($seq_no, $row);
         else
-          showMedicineStockRow($seq_no, $row);
+          showProductstockRow($seq_no, $row);
       }
     }
   }
 
-  function showMedicineStockRow($seq_no, $row) {
+  function showProductstockRow($seq_no, $row) {
     ?>
     <tr>
       <td><?php echo $seq_no; ?></td>
@@ -62,11 +62,11 @@
       <td><?php echo $row['MRP']; ?></td>
       <td><?php echo $row['RATE']; ?></td>
       <td>
-        <button href="" class="btn btn-info btn-sm" onclick="editMedicineStock('<?php echo $row['BATCH_ID']; ?>');">
+        <button href="" class="btn btn-info btn-sm" onclick="editProductStock('<?php echo $row['BATCH_ID']; ?>');">
           <i class="fa fa-pencil"></i>
         </button>
         <!--
-        <button class="btn btn-danger btn-sm" onclick="deleteMedicineStock(<?php echo $row['ID']; ?>);">
+        <button class="btn btn-danger btn-sm" onclick="deleteProductStock(<?php echo $row['ID']; ?>);">
           <i class="fa fa-trash"></i>
         </button>
       -->
@@ -105,7 +105,7 @@ function showEditOptionsRow($seq_no, $row) {
       <code class="text-danger small font-weight-bold float-right" id="rate_error" style="display: none;"></code>
     </td>
     <td>
-      <button href="" class="btn btn-success btn-sm" onclick="updateMedicineStock(<?php echo $row[5]; ?>);">
+      <button href="" class="btn btn-success btn-sm" onclick="updateProductStock(<?php echo $row[5]; ?>);">
         <i class="fa fa-edit"></i>
       </button>
       <button class="btn btn-danger btn-sm" onclick="cancel();">
@@ -116,15 +116,15 @@ function showEditOptionsRow($seq_no, $row) {
   <?php
 }
 
-function updateMedicineStock($id, $batch_id, $expiry_date, $quantity, $mrp, $rate) {
+function updateProductStock($id, $batch_id, $expiry_date, $quantity, $mrp, $rate) {
   require "db_connection.php";
   $query = "UPDATE medicines_stock SET BATCH_ID = '$batch_id', EXPIRY_DATE = '$expiry_date', QUANTITY = $quantity, MRP = $mrp, RATE = $rate WHERE ID = $id";
   $result = mysqli_query($con, $query);
   if(!empty($result))
-    showMedicinesStock("0");
+    showProductsStock("0");
 }
 
-function searchMedicineStock($text, $column) {
+function searchProductStock($text, $column) {
   require "db_connection.php";
   if($con) {
     $seq_no = 0;
@@ -142,17 +142,17 @@ function searchMedicineStock($text, $column) {
       while($row = mysqli_fetch_array($result)) {
         $expiry_date = $row['EXPIRY_DATE'];
         if(substr($expiry_date, 3) < date('y'))
-          showMedicineStockRow($seq_no, $row);
+          showProductstockRow($seq_no, $row);
         else if(substr($expiry_date, 3) == date('y')) {
           if(substr($expiry_date, 0, 2) < date('m'))
-            showMedicineStockRow($seq_no, $row);
+            showProductstockRow($seq_no, $row);
         }
       }
     }
     else {
       while($row = mysqli_fetch_array($result)) {
         $seq_no++;
-        showMedicineStockRow($seq_no, $row);
+        showProductstockRow($seq_no, $row);
       }
     }
   }

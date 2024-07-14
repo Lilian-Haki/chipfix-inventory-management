@@ -41,14 +41,14 @@ function validateContactNumber(contact_number, error) {
 }
 
 function validateAddress(address, error) {
-  var result = document.getElementById(error);
+var result = document.getElementById(error);
   result.style.display = "block";
-  if(address.trim().length < 10) {
-    result.innerHTML = "Please enter more specific address!";
-    return false;
+  if(address.length < 3) {
+  result.innerHTML = "Please enter more specific address!";
+  return false;
   }
   else
-    result.style.display = "none";
+  result.style.display = "none";
   return true;
 }
 
@@ -113,25 +113,19 @@ function addCustomer() {
   var customer_name = document.getElementById("customer_name");
   var contact_number = document.getElementById("customer_contact_number");
   var customer_address = document.getElementById("customer_address");
-  var doctor_name = document.getElementById("customer_doctors_name");
-  var doctor_address = document.getElementById("customer_doctors_address");
   if(!validateName(customer_name.value, "name_error"))
     customer_name.focus();
   else if(!validateContactNumber(contact_number.value, "contact_number_error"))
     contact_number.focus();
   else if(!validateAddress(customer_address.value, "address_error"))
     customer_address.focus();
-  else if(!validateName(doctor_name.value, 'doctor_name_error'))
-    doctor_name.focus();
-  else if(!validateAddress(doctor_address.value, 'doctor_address_error'))
-    doctor_address.focus();
   else {
     var xhttp = new XMLHttpRequest();
   	xhttp.onreadystatechange = function() {
   		if(xhttp.readyState = 4 && xhttp.status == 200)
   			document.getElementById("customer_acknowledgement").innerHTML = xhttp.responseText;
   	};
-  	xhttp.open("GET", "php/add_new_customer.php?name=" + customer_name.value + "&contact_number=" + contact_number.value + "&address=" + customer_address.value + "&doctor_name=" + doctor_name.value + "&doctor_address=" + doctor_address.value, true);
+  	xhttp.open("GET", "php/add_new_customer.php?name=" + customer_name.value + "&contact_number=" + contact_number.value + "&address=" + customer_address.value , true);
   	xhttp.send();
   }
   return false;
@@ -160,13 +154,13 @@ function addSupplier() {
   }
 }
 
-function addMedicine() {
-  document.getElementById("medicine_acknowledgement").innerHTML = "";
-  var name = document.getElementById("medicine_name");
+function addProduct() {
+  document.getElementById("product_acknowledgement").innerHTML = "";
+  var name = document.getElementById("product_name");
   var packing = document.getElementById("packing");
   var generic_name = document.getElementById("generic_name");
   var suppliers_name = document.getElementById("suppliers_name");
-  if(!notNull(name.value, "medicine_name_error"))
+  if(!notNull(name.value, "product_name_error"))
     name.focus();
   else if(!notNull(packing.value, "pack_error"))
     packing.focus();
@@ -176,7 +170,7 @@ function addMedicine() {
     var xhttp = new XMLHttpRequest();
   	xhttp.onreadystatechange = function() {
   		if(xhttp.readyState = 4 && xhttp.status == 200)
-  			document.getElementById("medicine_acknowledgement").innerHTML = xhttp.responseText;
+  			document.getElementById("product_acknowledgement").innerHTML = xhttp.responseText;
   	};
   	xhttp.open("GET", "php/add_new_medicine.php?name=" + name.value + "&packing=" + packing.value + "&generic_name=" + generic_name.value + "&suppliers_name=" + suppliers_name.value, true);
   	xhttp.send();

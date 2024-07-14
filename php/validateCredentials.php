@@ -41,14 +41,12 @@
   function storeAdminData() {
     require "db_connection.php";
     if($con) {
-      $pharmacy_name = $_GET["pharmacy_name"];
-      $address = $_GET["address"];
       $email = $_GET["email"];
       $contact_number = $_GET["contact_number"];
       $username = $_GET["username"];
       $password = $_GET["password"];
 
-      $query = "INSERT INTO admin_credentials (PHARMACY_NAME, ADDRESS, EMAIL, CONTACT_NUMBER, USERNAME, PASSWORD, IS_LOGGED_IN) VALUES('$pharmacy_name', '$address', '$email', '$contact_number', '$username', '$password', 'false')";
+      $query = "INSERT INTO admin_credentials (EMAIL, CONTACT_NUMBER, USERNAME, PASSWORD, IS_LOGGED_IN) VALUES('$email', '$contact_number', '$username', '$password', 'false')";
       $result = mysqli_query($con, $query);
       echo ($result) ? "true" : "false";
     }
@@ -108,15 +106,13 @@
   function updateAdminInfo() {
     require "db_connection.php";
     if($con) {
-      $pharmacy_name = $_GET["pharmacy_name"];
-      $address = $_GET["address"];
       $email = $_GET["email"];
       $contact_number = $_GET["contact_number"];
       $username = $_GET["username"];
 
-      $query = "UPDATE admin_credentials SET PHARMACY_NAME = '$pharmacy_name', ADDRESS = '$address', EMAIL = '$email', CONTACT_NUMBER = '$contact_number', USERNAME = '$username'";
+      $query = "UPDATE admin_credentials SET EMAIL = '$email', CONTACT_NUMBER = '$contact_number', USERNAME = '$username'";
       $result = mysqli_query($con, $query);
-      echo ($result) ? "Details updated..." : "Oops! Somthing wrong happend...";
+      echo ($result) ? "Details updated..." : "Oops! Something wrong happened...";
     }
   }
 
@@ -130,7 +126,7 @@
 
       $query = "UPDATE admin_credentials SET PASSWORD = '$password'";
       $result = mysqli_query($con, $query);
-      echo ($result) ? "Password changed..." : "Oops! Somthing wrong happend...";
+      echo ($result) ? "Password changed..." : "Oops! Something wrong happened...";
     }
   }
 

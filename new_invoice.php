@@ -18,21 +18,7 @@
     <script src="js/restrict.js"></script>
   </head>
   <body>
-    <div id="add_new_customer_model">
-      <div class="modal-dialog">
-      	<div class="modal-content">
-      		<div class="modal-header" style="background-color: #527AFF; color: white">
-            <div class="font-weight-bold">Add New Customer</div>
-      			<button class="close" style="outline: none;" onclick="document.getElementById('add_new_customer_model').style.display = 'none';"><i class="fa fa-close"></i></button>
-      		</div>
-      		<div class="modal-body">
-            <?php
-              include('sections/add_new_customer.html');
-            ?>
-      		</div>
-      	</div>
-      </div>
-    </div>
+    
     <!-- including side navigations -->
     <?php include("sections/sidenav.html"); ?>
 
@@ -83,12 +69,13 @@
           <!-- new user button -->
           <div class="row col col-md-12">
             <div class="col col-md-2 form-group">
-              <button class="btn btn-primary form-control" onclick="document.getElementById('add_new_customer_model').style.display = 'block';">New Customer</button>
+            <label class="font-weight-bold" for="customers_contact_number">Contact Number :</label>
+            <input id="customers_contact_number" type="number" class="form-control" name="customers_contact_number" placeholder="Phone Number" disabled>
             </div>
             <div class="col col-md-1 form-group"></div>
             <div class="col col-md-2 form-group">
-              <label class="font-weight-bold" for="customers_contact_number">Contact Number :</label>
-              <input id="customers_contact_number" type="number" class="form-control" name="customers_contact_number" placeholder="Phone Number" disabled>
+              <label class="font-weight-bold" for="customers_contact_number">Transaction Code :</label>
+              <input id="customers_contact_number" type="number" class="form-control" name="customers_contact_number" placeholder="Code" disabled>
             </div>
           </div>
           <!-- closing new user button -->

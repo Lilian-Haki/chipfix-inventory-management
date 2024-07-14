@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Add New Medicine</title>
+    <title>Add New Product</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script src="bootstrap/js/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
@@ -20,7 +20,7 @@
       <div class="modal-dialog">
       	<div class="modal-content">
       		<div class="modal-header" style="background-color: #7F74E7; color: white">
-            <div class="font-weight-bold">Add New Supplier</div>
+            <div class="font-weight-bold">Add New Product</div>
       			<button class="close" style="outline: none;" onclick="document.getElementById('add_new_supplier_model').style.display = 'none';"><i class="fa fa-close"></i></button>
       		</div>
       		<div class="modal-body">
@@ -49,7 +49,7 @@
           <div class="row col col-md-6">
             <?php
               // form content
-              require "sections/add_new_medicine.html";
+              require "sections/add_new_product.html";
             ?>
           </div>
         </div>

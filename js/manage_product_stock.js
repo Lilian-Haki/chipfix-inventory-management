@@ -1,27 +1,27 @@
-function deleteMedicineStock(id) {
+function deleteProductStock(id) {
   var confirmation = confirm("Are you sure?");
   if(confirmation) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if(xhttp.readyState = 4 && xhttp.status == 200)
-        document.getElementById('medicines_stock_div').innerHTML = xhttp.responseText;
+        document.getElementById('products_stock_div').innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/manage_medicine_stock.php?action=delete&id=" + id, true);
+    xhttp.open("GET", "php/manage_product_stock.php?action=delete&id=" + id, true);
     xhttp.send();
   }
 }
 
-function editMedicineStock(id) {
+function editProductStock(id) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if(xhttp.readyState = 4 && xhttp.status == 200)
-      document.getElementById('medicines_stock_div').innerHTML = xhttp.responseText;
+      document.getElementById('products_stock_div').innerHTML = xhttp.responseText;
   };
-  xhttp.open("GET", "php/manage_medicine_stock.php?action=edit&id=" + id, true);
+  xhttp.open("GET", "php/manage_product_stock.php?action=edit&id=" + id, true);
   xhttp.send();
 }
 
-function updateMedicineStock(id) {
+function updateProductStock(id) {
   var batch_id = document.getElementById("batch_id");
   var expiry_date = document.getElementById("expiry_date");
   var quantity = document.getElementById("quantity");
@@ -47,9 +47,9 @@ function updateMedicineStock(id) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if(xhttp.readyState = 4 && xhttp.status == 200)
-        document.getElementById('medicines_stock_div').innerHTML = xhttp.responseText;
+        document.getElementById('products_stock_div').innerHTML = xhttp.responseText;
     };
-    xhttp.open("GET", "php/manage_medicine_stock.php?action=update&id=" + id + "&batch_id=" + batch_id.value + "&expiry_date=" + expiry_date.value + "&quantity=" + quantity.value + "&mrp=" + mrp.value + "&rate=" + rate.value, true);
+    xhttp.open("GET", "php/manage_product_stock.php?action=update&id=" + id + "&batch_id=" + batch_id.value + "&expiry_date=" + expiry_date.value + "&quantity=" + quantity.value + "&mrp=" + mrp.value + "&rate=" + rate.value, true);
     xhttp.send();
   }
 }
@@ -58,13 +58,13 @@ function cancel() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if(xhttp.readyState = 4 && xhttp.status == 200)
-      document.getElementById('medicines_stock_div').innerHTML = xhttp.responseText;
+      document.getElementById('products_stock_div').innerHTML = xhttp.responseText;
   };
-  xhttp.open("GET", "php/manage_medicine_stock.php?action=cancel", true);
+  xhttp.open("GET", "php/manage_product_stock.php?action=cancel", true);
   xhttp.send();
 }
 
-function searchMedicineStock(text, tag) {
+function searchProductStock(text, tag) {
   if(tag == "NAME") {
     document.getElementById("by_generic_name").value = "";
     document.getElementById("by_suppliers_name").value = "";
@@ -81,8 +81,8 @@ function searchMedicineStock(text, tag) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if(xhttp.readyState = 4 && xhttp.status == 200)
-      document.getElementById('medicines_stock_div').innerHTML = xhttp.responseText;
+      document.getElementById('products_stock_div').innerHTML = xhttp.responseText;
   };
-  xhttp.open("GET", "php/manage_medicine_stock.php?action=search&text=" + text + "&tag=" + tag, true);
+  xhttp.open("GET", "php/manage_product_stock.php?action=search&text=" + text + "&tag=" + tag, true);
   xhttp.send();
 }

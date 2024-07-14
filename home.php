@@ -68,9 +68,9 @@
               }
               createSection1('manage_customer.php', 'Total Customers', 'customers');
               createSection1('manage_supplier.php', 'Total Suppliers', 'suppliers');
-              createSection1('manage_medicine.ph p', 'Total Products', 'medicines');
-              createSection1('manage_medicine_stock.php?out_of_stock', 'Out of Stock', 'medicines_stock');
-              createSection1('manage_medicine_stock.php?expired', 'Expired', 'medicines_stock');
+              createSection1('manage_product.ph p', 'Total Products', 'medicines');
+              createSection1('manage_product_stock.php?out_of_stock', 'Out of Stock', 'medicines_stock');
+              createSection1('manage_product_stock.php?expired', 'Expired', 'medicines_stock');
               createSection1('manage_invoice.php', 'Total Invoices', 'invoices');
             ?>
 

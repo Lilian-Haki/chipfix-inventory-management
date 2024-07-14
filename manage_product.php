@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Manage Medicines</title>
+    <title>Manage Product</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script src="bootstrap/js/jquery.min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/sidenav.css">
     <link rel="stylesheet" href="css/home.css">
-    <script src="js/manage_medicine.js"></script>
+    <script src="js/manage_product.js"></script>
     <script src="js/validateForm.js"></script>
     <script src="js/restrict.js"></script>
   </head>
@@ -34,9 +34,9 @@
 
           <div class="col-md-12 form-group form-inline">
             <label class="font-weight-bold" for="">Search :&emsp;</label>
-            <input type="text" class="form-control" id="by_name" placeholder="By Product Name" onkeyup="searchMedicine(this.value, 'name');">
-            &emsp;<input type="text" class="form-control" id="by_generic_name" placeholder="By Generic Name" onkeyup="searchMedicine(this.value, 'generic_name');">
-            &emsp;<input type="text" class="form-control" id="by_suppliers_name" placeholder="By Supplier Name" onkeyup="searchMedicine(this.value, 'suppliers_name');">
+            <input type="text" class="form-control" id="by_name" placeholder="By Product Name" onkeyup="searchProduct(this.value, 'name');">
+            &emsp;<input type="text" class="form-control" id="by_generic_name" placeholder="By Generic Name" onkeyup="searchProduct(this.value, 'generic_name');">
+            &emsp;<input type="text" class="form-control" id="by_suppliers_name" placeholder="By Supplier Name" onkeyup="searchProduct(this.value, 'suppliers_name');">
           </div>
 
           <div class="col col-md-12">
@@ -56,10 +56,10 @@
                     <th style="width: 15%;">Action</th>
             			</tr>
             		</thead>
-            		<tbody id="medicines_div">
+            		<tbody id="products_div">
                   <?php
-                    require 'php/manage_medicine.php';
-                    showMedicines(0);
+                    require 'php/manage_product.php';
+                    showProducts(0);
                   ?>
             		</tbody>
             	</table>

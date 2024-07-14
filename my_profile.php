@@ -30,32 +30,12 @@
             $query = "SELECT * FROM admin_credentials";
             $result = mysqli_query($con, $query);
             $row = mysqli_fetch_array($result);
-            $pharmacy_name = $row['PHARMACY_NAME'];
-            $address = $row['ADDRESS'];
             $email = $row['EMAIL'];
             $contact_number = $row['CONTACT_NUMBER'];
             $username = $row['USERNAME'];
           }
         ?>
         <div class="row">
-          <div class="row col col-md-6">
-
-            <div class="row col col-md-12">
-              <div class="col col-md-12 form-group">
-                <label class="font-weight-bold" for="pharmacy_name">Pharmacy Name :</label>
-                <input id="pharmacy_name" type="text" class="form-control" value="<?php echo $pharmacy_name; ?>" placeholder="pharmacy name" onkeyup="validateName(this.value, 'pharmacy_name_error');" disabled>
-                <code class="text-danger small font-weight-bold float-right mb-2" id="pharmacy_name_error" style="display: none;"></code>
-              </div>
-            </div>
-
-            <div class="row col col-md-12">
-              <div class="col col-md-12 form-group">
-                <label class="font-weight-bold" for="address">Address :</label>
-                <textarea id="address" class="form-control" placeholder="address" onkeyup="validateAddress(this.value, 'address_error');" style="max-height: 100px;" disabled><?php echo $address; ?></textarea>
-                <code class="text-danger small font-weight-bold float-right mb-2" id="address_error" style="display: none;"></code>
-              </div>
-            </div>
-
             <div class="row col col-md-12">
               <div class="col col-md-12 form-group">
                 <label class="font-weight-bold" for="email">Email :</label>
@@ -67,7 +47,7 @@
             <div class="row col col-md-12">
               <div class="col col-md-12 form-group">
                 <label class="font-weight-bold" for="contact_number">Contact Number :</label>
-                <input id="contact_number" type="number" class="form-control" value="<?php echo $contact_number; ?>" placeholder="contact number" onkeyup="validateContactNumber(this.value, 'contact_number_error');" disabled>
+                <input id="contact_number" type="number" class="form-control" value="<?php echo $contact_number; ?>" placeholder="phone number" onkeyup="validateContactNumber(this.value, 'contact_number_error');" disabled>
                 <code class="text-danger small font-weight-bold float-right mb-2" id="contact_number_error" style="display: none;"></code>
               </div>
             </div>

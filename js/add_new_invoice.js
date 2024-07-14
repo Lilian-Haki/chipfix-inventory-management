@@ -63,22 +63,22 @@ function medicineOptions(text, id) {
   xhttp.send();
 }
 
-function fillFields(medicine_name, id) {
-  fill(medicine_name, 'batch_id_' + id, 'BATCH_ID');
-  fill(medicine_name, 'available_quantity_' + id, 'QUANTITY');
-  fill(medicine_name, 'expiry_date_' + id, 'EXPIRY_DATE');
-  fill(medicine_name, 'mrp_' + id, 'MRP');
+function fillFields(product_name, id) {
+  fill(product_name, 'batch_id_' + id, 'BATCH_ID');
+  fill(product_name, 'available_quantity_' + id, 'QUANTITY');
+  fill(product_name, 'expiry_date_' + id, 'EXPIRY_DATE');
+  fill(product_name, 'mrp_' + id, 'MRP');
   getTotal(id);
   var expiry_date = document.getElementById('expiry_date_' + id).value;
   //alert(expiry_date);
-  if(checkExpiry(expiry_date, 'medicine_name_error_' + id) != -1)
-    document.getElementById("medicine_name_error_" + id).style.display = "none";
+  if(checkExpiry(expiry_date, 'product_name_error_' + id) != -1)
+    document.getElementById("product_name_error_" + id).style.display = "none";
   else
     return;
   var available_quantity = document.getElementById("available_quantity_" + id).value;
   if(!checkAvailableQuantity(available_quantity, id))
     return;
-  document.getElementById("medicine_name_" + id).blur();
+  document.getElementById("product_name_" + id).blur();
 }
 
 function fill(name, field_name, column) {
@@ -122,18 +122,18 @@ function getTotal(id) {
 }
 
 function checkAvailableQuantity(value, id) {
-  var medicine_name = document.getElementById("medicine_name_" + id).value;
+  var product_name = document.getElementById("product_name_" + id).value;
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if(xhttp.readyState = 4 && xhttp.status == 200)
       xhttp.responseText;
   };
-  xhttp.open("GET", "php/add_new_invoice.php?action=check_quantity&medicine_name=" + medicine_name, false);
+  xhttp.open("GET", "php/add_new_invoice.php?action=check_quantity&product_name=" + product_name, false);
   xhttp.send();
   if(Number.parseInt(xhttp.responseText) == 0) {
-    document.getElementById("medicine_name_error_" + id).style.display = "block";
-    document.getElementById("medicine_name_error_" + id).innerHTML = "Out of Stock!";
-    //alert("medicine_name_error_" + id);
+    document.getElementById("product_name_error_" + id).style.display = "block";
+    document.getElementById("product_name_error_" + id).innerHTML = "Out of Stock!";
+    //alert("product_name_error_" + id);
     return -1;
   }
   else if(value > Number.parseInt(xhttp.responseText)) {
@@ -216,8 +216,8 @@ function addInvoice() {
       var elements_count = medicine_info[i].childElementCount;
       var elements = medicine_info[i].children;
 
-      var medicine_name = elements[0].children[0].children[0];
-      var medicine_name_error = elements[0].children[0].children[1];
+      var product_name = elements[0].children[0].children[0];
+      var product_name_error = elements[0].children[0].children[1];
 
       //var packing = elements[0].children[1].children[0];
       //var pack_error = elements[0].children[1].children[1];
@@ -246,24 +246,24 @@ function addInvoice() {
       var flag = false;
       //alert(quantity.getAttribute('id').slice(9, 10));
 
-      //alert(medicine_name.value + " " + batch_id.value + " " + expiry_date.value + " " + quantity.value + " " + mrp.value + " " + discount.value + " " +total.value);
+      //alert(product_name.value + " " + batch_id.value + " " + expiry_date.value + " " + quantity.value + " " + mrp.value + " " + discount.value + " " +total.value);
       var isAvailable = checkAvailableQuantity(quantity.value, quantity.getAttribute('id').slice(9, 10))
-      //alert(medicine_name.value);
-      if(!notNull(medicine_name.value, medicine_name_error.getAttribute('id')))
-        medicine_name.focus();
+      //alert(product_name.value);
+      if(!notNull(product_name.value, product_name_error.getAttribute('id')))
+        product_name.focus();
 
-      else if(isMedicine(medicine_name.value) == "false") {
-        medicine_name_error.style.display = "block";
-        medicine_name_error.innerHTML = "Medicine doesn't exists!";
-        medicine_name.focus();
+      else if(isMedicine(product_name.value) == "false") {
+        product_name_error.style.display = "block";
+        product_name_error.innerHTML = "Medicine doesn't exists!";
+        product_name.focus();
       }
 
-      else if(!checkExpiry(expiry_date.value, medicine_name_error.getAttribute('id')) || checkExpiry(expiry_date.value, medicine_name_error.getAttribute('id')) == -1)
-        medicine_name.focus();
+      else if(!checkExpiry(expiry_date.value, product_name_error.getAttribute('id')) || checkExpiry(expiry_date.value, product_name_error.getAttribute('id')) == -1)
+        product_name.focus();
 
       else if(isAvailable == -1) {
-        medicine_name_error.style.display = "block";
-        medicine_name.focus();
+        product_name_error.style.display = "block";
+        product_name.focus();
       }
 
       else if(!checkQuantity(quantity.value, quantity_error.getAttribute('id')))
@@ -286,7 +286,7 @@ function addInvoice() {
       else {
         flag = true;
         //alert("row " + i + "perfect...");
-        medicines[i-1] = new MedicineInfo(medicine_name.value, batch_id.value, expiry_date.value, quantity.value, mrp.value, discount.value, total.value);
+        medicines[i-1] = new MedicineInfo(product_name.value, batch_id.value, expiry_date.value, quantity.value, mrp.value, discount.value, total.value);
       }
 
       if(!flag)
@@ -316,14 +316,14 @@ function updateStock(name, batch_id, quantity) {
   xhttp.send();
 }
 
-function addSale(customers_name, customers_contact_number, invoice_number, medicine_name, batch_id, expiry_date, quantity, mrp, discount, total) {
+function addSale(customers_name, customers_contact_number, invoice_number, product_name, batch_id, expiry_date, quantity, mrp, discount, total) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if(xhttp.readyState = 4 && xhttp.status == 200)
       xhttp.responseText;
       //alert("Sales result : " + xhttp.responseText);
   };
-  xhttp.open("GET", "php/add_new_invoice.php?action=add_sale&customers_name=" + customers_name + "&customers_contact_number=" + customers_contact_number + "&invoice_number=" + invoice_number + "&medicine_name=" + medicine_name + "&batch_id=" + batch_id + "&expiry_date=" + expiry_date +  "&quantity=" + quantity + "&mrp=" + mrp + "&discount=" + discount + "&total=" + total, true);
+  xhttp.open("GET", "php/add_new_invoice.php?action=add_sale&customers_name=" + customers_name + "&customers_contact_number=" + customers_contact_number + "&invoice_number=" + invoice_number + "&product_name=" + product_name + "&batch_id=" + batch_id + "&expiry_date=" + expiry_date +  "&quantity=" + quantity + "&mrp=" + mrp + "&discount=" + discount + "&total=" + total, true);
   xhttp.send();
 }
 

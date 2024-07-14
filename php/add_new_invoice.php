@@ -22,7 +22,7 @@
     fill(strtoupper($_GET['name']), $_GET['column']);
 
   if(isset($_GET['action']) && $_GET['action'] == "check_quantity")
-    checkAvailableQuantity(strtoupper($_GET['medicine_name']));
+    checkAvailableQuantity(strtoupper($_GET['product_name']));
 
   if(isset($_GET['action']) && $_GET['action'] == "update_stock")
     updateStock(strtoupper($_GET['name']), $_GET['batch_id'], intval($_GET['quantity']));
@@ -69,8 +69,8 @@
     ?>
     <div class="row col col-md-12">
       <div class="col-md-2">
-        <input id="medicine_name_<?php echo $row_number; ?>" name="medicine_name" class="form-control" list="medicine_list_<?php echo $row_number; ?>" placeholder="Select Medicine" onkeydown="medicineOptions(this.value, 'medicine_list_<?php echo $row_number; ?>');" onfocus="medicineOptions(this.value, 'medicine_list_<?php echo $row_number; ?>');" onchange="fillFields(this.value, '<?php echo $row_number; ?>');">
-        <code class="text-danger small font-weight-bold float-right" id="medicine_name_error_<?php echo $row_number; ?>" style="display: none;"></code>
+        <input id="product_name_<?php echo $row_number; ?>" name="product_name" class="form-control" list="medicine_list_<?php echo $row_number; ?>" placeholder="Select Medicine" onkeydown="medicineOptions(this.value, 'medicine_list_<?php echo $row_number; ?>');" onfocus="medicineOptions(this.value, 'medicine_list_<?php echo $row_number; ?>');" onchange="fillFields(this.value, '<?php echo $row_number; ?>');">
+        <code class="text-danger small font-weight-bold float-right" id="product_name_error_<?php echo $row_number; ?>" style="display: none;"></code>
         <datalist id="medicine_list_<?php echo $row_number; ?>" style="display: none; max-height: 200px; overflow: auto;">
           <?php showMedicineList("") ?>
         </datalist>
@@ -170,7 +170,7 @@
   function addSale() {
     $customer_id = getCustomerId(strtoupper($_GET['customers_name']), $_GET['customers_contact_number']);
     $invoice_number = $_GET['invoice_number'];
-    $medicine_name = $_GET['medicine_name'];
+    $product_name = $_GET['product_name'];
     $batch_id = $_GET['batch_id'];
     $expiry_date = $_GET['expiry_date'];
     $quantity = $_GET['quantity'];
@@ -180,7 +180,7 @@
 
     require "db_connection.php";
     if($con) {
-      $query = "INSERT INTO sales (CUSTOMER_ID, INVOICE_NUMBER, MEDICINE_NAME, BATCH_ID, EXPIRY_DATE, QUANTITY, MRP, DISCOUNT, TOTAL) VALUES($customer_id, $invoice_number, '$medicine_name', '$batch_id', '$expiry_date', $quantity, $mrp, $discount, $total)";
+      $query = "INSERT INTO sales (CUSTOMER_ID, INVOICE_NUMBER, product_name, BATCH_ID, EXPIRY_DATE, QUANTITY, MRP, DISCOUNT, TOTAL) VALUES($customer_id, $invoice_number, '$product_name', '$batch_id', '$expiry_date', $quantity, $mrp, $discount, $total)";
       $result = mysqli_query($con, $query);
       echo ($result) ? "inserted sale" : "falied to add sale...";
     }
